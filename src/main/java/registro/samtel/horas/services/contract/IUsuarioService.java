@@ -11,9 +11,9 @@ public interface IUsuarioService {
 
     UsuarioEntity guardarUsuario(UsuarioEntity usuario);
 
-    UsuarioEntity actualizarUsuario(Long id, UsuarioEntity usuarioActualizado);
+    Optional<UsuarioEntity> actualizarUsuario(Long id, UsuarioEntity usuarioActualizado);
 
-    void eliminarUsuario(Long id);
+    boolean eliminarUsuario(Long id);
 
 }
 

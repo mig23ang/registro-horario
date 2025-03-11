@@ -1,19 +1,21 @@
 package registro.samtel.horas.services.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import registro.samtel.horas.models.contract.IUsuarioEntity;
+
+import registro.samtel.horas.models.contract.IUsuarioRepository;
 import registro.samtel.horas.models.entities.UsuarioEntity;
 import registro.samtel.horas.services.contract.IUsuarioService;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UsuarioServiceImpl implements IUsuarioService {
 
-    @Autowired
-    private IUsuarioEntity usuarioRepository;
+    private final IUsuarioRepository usuarioRepository;
 
     @Override
     public List<UsuarioEntity> listarUsuarios() {
@@ -27,25 +29,32 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
     @Override
     public UsuarioEntity guardarUsuario(UsuarioEntity usuario) {
-        return usuarioRepository.save(usuario);
+        try {
+            return usuarioRepository.save(usuario);
+        } catch (DataIntegrityViolationException e) {
+            throw new IllegalArgumentException("El correo " + usuario.getCorreo() + " ya está registrado.");
+        }
     }
 
     @Override
-    public UsuarioEntity actualizarUsuario(Long id, UsuarioEntity usuarioActualizado) {
+    public Optional<UsuarioEntity> actualizarUsuario(Long id, UsuarioEntity usuarioActualizado) {
         return usuarioRepository.findById(id).map(usuario -> {
+            usuario.setId(id);
             usuario.setNombre(usuarioActualizado.getNombre());
             usuario.setCorreo(usuarioActualizado.getCorreo());
             usuario.setRol(usuarioActualizado.getRol());
             usuario.setPassword(usuarioActualizado.getPassword());
             return usuarioRepository.save(usuario);
-        }).orElseThrow(() -> new RuntimeException("Usuario con ID " + id + " no encontrado"));
+        });
     }
 
     @Override
-    public void eliminarUsuario(Long id) {
-        usuarioRepository.deleteById(id);
+    public boolean eliminarUsuario(Long id) {
+        if (usuarioRepository.existsById(id)) {
+            usuarioRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
 }
-
-
