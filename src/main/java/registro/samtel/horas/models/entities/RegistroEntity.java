@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @Table(name = "registro")
 @AllArgsConstructor
@@ -18,7 +20,7 @@ public class RegistroEntity {
     private Long id;
 
     @Column(nullable = false)
-    private String fecha;
+    private Date fecha;
 
     @Column(nullable = false)
     private String horaEntrada;
