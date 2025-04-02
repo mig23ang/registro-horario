@@ -28,4 +28,15 @@ public class RegistroHorasController {
         return usuario;
     }
 
+    /**
+     * @ Body {Long} metodo para obtener usuario por id
+     */
+    @GetMapping("/{id}")
+    public UsuarioEntity obtenerUsuarioPorId(@PathVariable Long id) {
+        log.info("Inicio metodo obtenerUsuarioPorId en RegistroHorasController");
+        UsuarioEntity usuario = usuarioService.obtenerUsuarioPorId(id);
+        log.info("Termina metodo obtenerUsuarioPorId en RegistroHorasController");
+        return usuario;
+    }
+
 }
