@@ -24,10 +24,10 @@ public class GlobalExceptionHandler {
         return buildErrorResponse("Usuario no encontrado", ex.getMessage(), HttpStatus.NOT_FOUND);
     }
     // Manejar excepciones personalizadas (ejemplo: usuario no encontrado)
-    @ExceptionHandler(UsuarioNoEncontradoException.class)
-    public ResponseEntity<Map<String, Object>> handleUsuarioAdminEncontrado(UsuarioNoEncontradoException ex) {
-        return buildErrorResponse("Usuario no encontrado", ex.getMessage(), HttpStatus.NOT_FOUND);
-    }
+    //@ExceptionHandler(UsuarioNoEncontradoException.class)
+    //public ResponseEntity<Map<String, Object>> handleUsuarioAdminEncontrado(UsuarioNoEncontradoException ex) {
+      //  return buildErrorResponse("Usuario no encontrado", ex.getMessage(), HttpStatus.NOT_FOUND);
+    //}
 
     // Manejar errores de base de datos
     @ExceptionHandler(org.springframework.dao.DataIntegrityViolationException.class)

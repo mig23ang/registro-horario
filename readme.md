@@ -2,9 +2,16 @@
 
 # comnando de ejecucion
 
-mvn spring-boot:run
+```sh
+
+mvn spring-boot:run 
 
 mvn install
+```
+
+ 
+
+
 
 mvn clean install generate-sources
 
