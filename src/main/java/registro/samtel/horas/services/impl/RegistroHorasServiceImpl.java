@@ -64,4 +64,10 @@ public class RegistroHorasServiceImpl implements IRegistroHorasService {
         log.info("Termina metodo consultarTodosregistrosUsuario en RegistroServiceImpl");
        return registrosUsuarios;
     }
+
+    @Override
+    public Optional<RegistroEntity> consultarEstadoUsuario(Long id, Long idUsuario) {
+        return registroHorasRepository.findByIdAndUsuarioId(id, idUsuario);
+    }
+
 }

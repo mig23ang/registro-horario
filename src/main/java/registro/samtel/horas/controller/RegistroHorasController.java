@@ -1,11 +1,13 @@
 package registro.samtel.horas.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import registro.samtel.horas.models.entities.RegistroEntity;
 import registro.samtel.horas.services.impl.RegistroHorasServiceImpl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @RestController
@@ -59,6 +61,14 @@ public class RegistroHorasController {
         List<RegistroEntity> registrosUsuario = registroHorasServiceImpl.consultarTodosRegistrosUsuario(idUsuario);
         log.info("Termina metodo consultarTodosRegistrosUusuario en RegistroHorasController");
         return registrosUsuario;
+    }
+
+    // Por evaluar si dejamos este metodo o no, ya que el estado se puede consultar en registro Por Id
+    @GetMapping("registro/{id}/usuario/{idUsuario}")
+    public ResponseEntity<RegistroEntity> consultarEstadoUsuario(@PathVariable Long id, @PathVariable Long idUsuario) {
+        Optional<RegistroEntity> registro = registroHorasServiceImpl.consultarEstadoUsuario(id, idUsuario);
+        return registro.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 
