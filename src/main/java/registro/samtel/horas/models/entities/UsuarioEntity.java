@@ -1,8 +1,12 @@
 package registro.samtel.horas.models.entities;
 
+
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import registro.samtel.horas.models.enums.RolUsuario;
+
 
 @Data
 @AllArgsConstructor
@@ -13,20 +17,16 @@ public class UsuarioEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private  Long id;
 
     @Column(nullable = false, length = 50)
-    private String nombre;
+    private  String nombre;
 
     @Column(nullable = false, length = 50, unique = true)
-    private String correo;
+    private  String correo;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private RolUsuario rol;
 
-    @Column(nullable = false)
     private String password;
 
 }
-
