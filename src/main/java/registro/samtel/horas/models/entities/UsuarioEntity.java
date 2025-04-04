@@ -25,8 +25,13 @@ public class UsuarioEntity {
     @Column(nullable = false, length = 50, unique = true)
     private  String correo;
 
+    @Enumerated(EnumType.STRING) // Guardar enum como String en la base de datos
+    @Column(nullable = false)
     private RolUsuario rol;
 
     private String password;
+
+    @Column(nullable = false)
+    private Boolean estado;
 
 }
