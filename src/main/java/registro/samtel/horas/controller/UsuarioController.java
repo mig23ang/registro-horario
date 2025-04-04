@@ -11,9 +11,9 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/v1")
-public class RegistroHorasController {
+public class UsuarioController {
 
-    private static Logger log = Logger.getLogger(String.valueOf(RegistroHorasController.class));
+    private static Logger log = Logger.getLogger(String.valueOf(UsuarioController.class));
 
     @Autowired
     UsuarioServiceImpl usuarioService;
