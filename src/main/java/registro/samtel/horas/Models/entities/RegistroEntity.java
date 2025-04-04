@@ -1,4 +1,4 @@
-package registro.samtel.horas.models.entities;
+package registro.samtel.horas.Models.entities;
 
 
 import jakarta.persistence.*;

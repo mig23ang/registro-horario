@@ -1,20 +1,17 @@
-## software para el registro de horas de entrada y salida de trabajadores
+## Software para el registro de horas de entrada y salida de trabajadores
 
-# comnando de ejecucion
+# Comando de ejecucion
 
-```sh
-
+```
 mvn spring-boot:run 
-
+```
+```
 mvn install
 ```
-
- 
-
-
-
+```
 mvn clean install generate-sources
+```
 
-## COMANDO PARA GENERAR LA BASE DE DATOS POSTGREES CONDOCKER
+## COMANDO PARA GENERAR LA BASE DE DATOS MYSQL CON DOCKER
 
-docker run --name postgres-horas -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin123 -e POSTGRES_DB=empresa -p 5432:5432 postgres
+docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=admin123 -e MYSQL_DATABASE=empresa -p 3307:3306 -d mysql:latest

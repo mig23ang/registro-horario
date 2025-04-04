@@ -3,9 +3,9 @@ package registro.samtel.horas.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import registro.samtel.horas.models.contract.IUsuarioEntity;
-import registro.samtel.horas.models.entities.UsuarioEntity;
-import registro.samtel.horas.models.enums.RolUsuario;
+import registro.samtel.horas.Models.contract.IUsuarioEntity;
+import registro.samtel.horas.Models.entities.UsuarioEntity;
+import registro.samtel.horas.Models.enums.RolUsuario;
 import registro.samtel.horas.services.contract.IUsuarioServiceImpl;
 import registro.samtel.horas.utils.exceptions.UsuarioNoEncontradoException;
 

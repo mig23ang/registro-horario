@@ -1,6 +1,6 @@
 package registro.samtel.horas.services.contract;
 
-import registro.samtel.horas.models.entities.UsuarioEntity;
+import registro.samtel.horas.Models.entities.UsuarioEntity;
 
 import java.util.List;
 

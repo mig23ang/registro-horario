@@ -1,9 +1,9 @@
-package registro.samtel.horas.controller;
+package registro.samtel.horas.Controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import registro.samtel.horas.models.entities.UsuarioEntity;
+import registro.samtel.horas.Models.entities.UsuarioEntity;
 import registro.samtel.horas.services.impl.UsuarioServiceImpl;
 
 import java.util.List;
@@ -11,8 +11,9 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/v1")
-public class RegistroHorasController {
 
+public class RegistroHorasController {
+/*
     private static Logger log = Logger.getLogger(String.valueOf(RegistroHorasController.class));
 
     @Autowired
@@ -20,7 +21,7 @@ public class RegistroHorasController {
 
     /**
      * @ Body {UsuarioEntity} metodo para crear usuario
-     */
+     *
     @PostMapping("/usuario")
     public UsuarioEntity crearUsuario(@RequestBody UsuarioEntity usuario) {
         log.info("Inicio metodo crearUsuario en RegistroHorasController");
@@ -31,7 +32,7 @@ public class RegistroHorasController {
 
     /**
      * @ Body {Long} metodo para obtener usuario por id
-     */
+     *
     @GetMapping("/usuario/{id}")
     public UsuarioEntity consultarUsuarioPorId(@PathVariable Long id) {
         log.info("Inicio metodo obtenerUsuarioPorId en RegistroHorasController");
@@ -43,7 +44,7 @@ public class RegistroHorasController {
 
     /**
      * @ Body {Long id} metodo para editar usuario por id
-     */
+     *
     @PutMapping("/usuario/{id}")
     public UsuarioEntity editarUsuarioPorId(@PathVariable Long id, @RequestBody UsuarioEntity usuario) {
         log.info("Inicio metodo editarUsuarioPorId en RegistroHorasController");
@@ -54,7 +55,7 @@ public class RegistroHorasController {
 
     /**
      * @ Body {Long, estado} metodo para eliminar usuario por id "cambiar estado"
-     */
+     *
     @PatchMapping("/usuario/{id}")
     public Boolean eliminarUsuarioPorId(@PathVariable Long id, @RequestBody Boolean estado) {
         log.info("Inicio metodo eliminarUsuarioPorId en RegistroHorasController");
@@ -65,7 +66,7 @@ public class RegistroHorasController {
 
     /**
      * @ metodo para obtener todos los usuarios
-     */
+     *
     @GetMapping("/usuarios/todos")
     public List<UsuarioEntity> consultarTodosUsuarios() {
         log.info("Inicio metodo consultarTodosUsuarios en RegistroHorasController");
@@ -73,4 +74,6 @@ public class RegistroHorasController {
         log.info("Termina metodo consultarTodosUsuarios en RegistroHorasController");
         return usuarios;
     }
+
+ */
 }
