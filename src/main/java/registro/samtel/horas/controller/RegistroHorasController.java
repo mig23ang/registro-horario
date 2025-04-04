@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import registro.samtel.horas.models.entities.UsuarioEntity;
 import registro.samtel.horas.services.impl.UsuarioServiceImpl;
-import registro.samtel.horas.utils.exceptions.GlobalExceptionHandler;
-import registro.samtel.horas.utils.exceptions.UsuarioNoEncontradoException;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -68,7 +66,7 @@ public class RegistroHorasController {
     /**
      * @ metodo para obtener todos los usuarios
      */
-    @GetMapping("/todos/usuarios")
+    @GetMapping("/usuarios/todos")
     public List<UsuarioEntity> consultarTodosUsuarios() {
         log.info("Inicio metodo consultarTodosUsuarios en RegistroHorasController");
         List<UsuarioEntity> usuarios = usuarioService.consultarTodosUsuarios();

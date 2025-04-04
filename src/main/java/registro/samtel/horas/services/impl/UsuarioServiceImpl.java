@@ -3,7 +3,6 @@ package registro.samtel.horas.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import registro.samtel.horas.controller.RegistroHorasController;
 import registro.samtel.horas.models.contract.IUsuarioEntity;
 import registro.samtel.horas.models.entities.UsuarioEntity;
 import registro.samtel.horas.models.enums.RolUsuario;
@@ -71,6 +70,7 @@ public class UsuarioServiceImpl implements IUsuarioServiceImpl {
             // editar su estado a inactivo
             UsuarioEntity usuario = usuarioEntity.get();
             usuario.setEstado(estado);
+            usuarioRepository.save(usuario); // 🔹 Guardar los cambios en la BD
             log.info("Termina metodo eliminarUsuarioPorId en UsuarioServiceImpl");
             return true;
         }
@@ -87,6 +87,6 @@ public class UsuarioServiceImpl implements IUsuarioServiceImpl {
             throw new UsuarioNoEncontradoException("No se encontraron usuarios en la base de datos");
         }
         log.info("Termina metodo consultarTodosUsuarios en UsuarioServiceImpl");
-        return List.of();
+        return usuarios;
     }
 }

@@ -17,4 +17,4 @@ mvn clean install generate-sources
 
 ## COMANDO PARA GENERAR LA BASE DE DATOS POSTGREES CONDOCKER
 
-docker run --name postgres-horas -e POSTGRES_USER=admin -e POSTGRES_USER=admin123 -e POSTGRES_DB=empresa -p 5432:5432 postgres
+docker run --name postgres-horas -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin123 -e POSTGRES_DB=empresa -p 5432:5432 postgres
