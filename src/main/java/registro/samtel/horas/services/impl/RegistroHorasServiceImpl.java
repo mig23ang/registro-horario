@@ -52,4 +52,16 @@ public class RegistroHorasServiceImpl implements IRegistroHorasService {
         log.info("Termina metodo consultarTodosregistros en RegistroServiceImpl");
         return registros;
     }
+
+    @Override
+    public List<RegistroEntity> consultarTodosRegistrosUsuario(Long idUsuario) {
+       log.info("Inicio metodo consultarTodosRegistrosUsuario en RegistroServiceImpl");
+       List<RegistroEntity> registrosUsuarios = registroHorasRepository.findByUsuarioId(idUsuario);
+        if (registrosUsuarios.isEmpty()) {
+            log.warning("No se encontraron registros de usuarios en la base de datos");
+            throw new UsuarioNoEncontradoException("No se encontraron registros de usuarios en la base de datos");
+        }
+        log.info("Termina metodo consultarTodosregistrosUsuario en RegistroServiceImpl");
+       return registrosUsuarios;
+    }
 }

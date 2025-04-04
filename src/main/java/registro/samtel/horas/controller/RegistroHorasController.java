@@ -3,7 +3,6 @@ package registro.samtel.horas.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import registro.samtel.horas.models.entities.RegistroEntity;
-import registro.samtel.horas.models.entities.UsuarioEntity;
 import registro.samtel.horas.services.impl.RegistroHorasServiceImpl;
 
 import java.util.List;
@@ -49,6 +48,17 @@ public class RegistroHorasController {
         List<RegistroEntity> Registros = registroHorasServiceImpl.consultarTodosRegistros();
         log.info("Termina metodo consultarTodosRegistros en RegistroHorasController");
         return Registros;
+    }
+
+    /**
+     * @ metodo para obtener todos los registros horas de un usuario
+     */
+    @GetMapping("/registros/usuario/{idUsuario}")
+    public List<RegistroEntity> consultarTodosRegistrosUsuario(@PathVariable Long idUsuario) {
+        log.info("Inicio metodo consultarTodosRegistrosUsuario en RegistroHorasController");
+        List<RegistroEntity> registrosUsuario = registroHorasServiceImpl.consultarTodosRegistrosUsuario(idUsuario);
+        log.info("Termina metodo consultarTodosRegistrosUusuario en RegistroHorasController");
+        return registrosUsuario;
     }
 
 

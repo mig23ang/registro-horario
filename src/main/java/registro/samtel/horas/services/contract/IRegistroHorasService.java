@@ -11,4 +11,6 @@ public interface IRegistroHorasService {
 
     List<RegistroEntity> consultarTodosRegistros();
 
+    List<RegistroEntity> consultarTodosRegistrosUsuario(Long idUsuario);
+
 }
