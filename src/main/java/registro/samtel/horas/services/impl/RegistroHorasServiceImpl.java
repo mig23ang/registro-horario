@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import registro.samtel.horas.models.contract.IRegistroHorasRepository;
 import registro.samtel.horas.models.entities.RegistroEntity;
+import registro.samtel.horas.models.entities.UsuarioEntity;
 import registro.samtel.horas.services.contract.IRegistroHorasService;
 import registro.samtel.horas.utils.exceptions.UsuarioNoEncontradoException;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -37,5 +39,17 @@ public class RegistroHorasServiceImpl implements IRegistroHorasService {
         }
         log.info("Termina metodo consultarRegistroPorId en RegistroServiceImpl");
         return registroEntity.get();
+    }
+
+    @Override
+    public List<RegistroEntity> consultarTodosRegistros() {
+        log.info("Inicio metodo consultarTodosRegistros en RegistroServiceImpl");
+        List<RegistroEntity> registros = registroHorasRepository.findAll();
+        if (registros.isEmpty()) {
+            log.warning("No se encontraron registros en la base de datos");
+            throw new UsuarioNoEncontradoException("No se encontraron registros en la base de datos");
+        }
+        log.info("Termina metodo consultarTodosregistros en RegistroServiceImpl");
+        return registros;
     }
 }
