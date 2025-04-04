@@ -5,9 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -18,12 +16,11 @@ import java.util.Date;
 public class RegistroEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    @CreationTimestamp
-    private LocalDate fecha;
+    private Date fechaDeRegistro;
 
     @Column(nullable = false)
     private String horaEntrada;
