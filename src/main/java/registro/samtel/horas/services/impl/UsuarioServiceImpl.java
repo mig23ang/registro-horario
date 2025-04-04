@@ -3,10 +3,10 @@ package registro.samtel.horas.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import registro.samtel.horas.models.contract.IUsuarioEntity;
+import registro.samtel.horas.models.contract.IUsuarioRepository;
 import registro.samtel.horas.models.entities.UsuarioEntity;
 import registro.samtel.horas.models.enums.RolUsuario;
-import registro.samtel.horas.services.contract.IUsuarioServiceImpl;
+import registro.samtel.horas.services.contract.IUsuarioService;
 import registro.samtel.horas.utils.exceptions.UsuarioNoEncontradoException;
 
 import java.util.List;
@@ -14,11 +14,11 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 @Service
-public class UsuarioServiceImpl implements IUsuarioServiceImpl {
+public class UsuarioServiceImpl implements IUsuarioService {
 
     private static Logger log = Logger.getLogger(String.valueOf(UsuarioServiceImpl.class));
     @Autowired
-    IUsuarioEntity usuarioRepository;
+    IUsuarioRepository usuarioRepository;
 
     @Override
     public UsuarioEntity crearUsuario(UsuarioEntity usuario) {
