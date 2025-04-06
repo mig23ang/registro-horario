@@ -3,7 +3,7 @@ package registro.samtel.horas.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import registro.samtel.horas.models.entities.RegistroEntity;
+import registro.samtel.horas.models.entities.RegistroHorasEntity;
 import registro.samtel.horas.services.impl.RegistroHorasServiceImpl;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class RegistroHorasController {
      * @ Body {RegistroEntity} metodo para crear registrar Horas
      */
     @PostMapping("/registro")
-    public RegistroEntity crearRegistro(@RequestBody RegistroEntity registro) {
+    public RegistroHorasEntity crearRegistro(@RequestBody RegistroHorasEntity registro) {
         log.info("Inicio metodo crearRegistro en RegistroHorasController");
         registroHorasServiceImpl.crearRegistro(registro);
         log.info("Termina metodo crearRegistro en RegistroHorasController");
@@ -34,9 +34,9 @@ public class RegistroHorasController {
      * @ Body {Long} metodo para consultar registro por id
      */
     @GetMapping("/registro/{id}")
-    public RegistroEntity consultarRegistroPorId(@PathVariable Long id) {
+    public RegistroHorasEntity consultarRegistroPorId(@PathVariable Long id) {
         log.info("Inicio metodo consultarRegistroPorId en RegistroHorasController");
-        RegistroEntity registro = registroHorasServiceImpl.consultarRegistroPorId(id);
+        RegistroHorasEntity registro = registroHorasServiceImpl.consultarRegistroPorId(id);
         log.info("Termina metodo consultarRegistroPorId en RegistroHorasController");
         return registro;
     }
@@ -45,9 +45,9 @@ public class RegistroHorasController {
      * @ metodo para obtener todos los registros
      */
     @GetMapping("/registros/todos")
-    public List<RegistroEntity> consultarTodosRegistros() {
+    public List<RegistroHorasEntity> consultarTodosRegistros() {
         log.info("Inicio metodo consultarTodosRegistros en RegistroHorasController");
-        List<RegistroEntity> Registros = registroHorasServiceImpl.consultarTodosRegistros();
+        List<RegistroHorasEntity> Registros = registroHorasServiceImpl.consultarTodosRegistros();
         log.info("Termina metodo consultarTodosRegistros en RegistroHorasController");
         return Registros;
     }
@@ -56,19 +56,30 @@ public class RegistroHorasController {
      * @ metodo para obtener todos los registros horas de un usuario
      */
     @GetMapping("/registros/usuario/{idUsuario}")
-    public List<RegistroEntity> consultarTodosRegistrosUsuario(@PathVariable Long idUsuario) {
+    public List<RegistroHorasEntity> consultarTodosRegistrosUsuario(@PathVariable Long idUsuario) {
         log.info("Inicio metodo consultarTodosRegistrosUsuario en RegistroHorasController");
-        List<RegistroEntity> registrosUsuario = registroHorasServiceImpl.consultarTodosRegistrosUsuario(idUsuario);
+        List<RegistroHorasEntity> registrosUsuario = registroHorasServiceImpl.consultarTodosRegistrosUsuario(idUsuario);
         log.info("Termina metodo consultarTodosRegistrosUusuario en RegistroHorasController");
         return registrosUsuario;
     }
 
     // Por evaluar si dejamos este metodo o no, ya que el estado se puede consultar en registro Por Id
     @GetMapping("registro/{id}/usuario/{idUsuario}")
-    public ResponseEntity<RegistroEntity> consultarEstadoUsuario(@PathVariable Long id, @PathVariable Long idUsuario) {
-        Optional<RegistroEntity> registro = registroHorasServiceImpl.consultarEstadoUsuario(id, idUsuario);
+    public ResponseEntity<RegistroHorasEntity> consultarEstadoUsuario(@PathVariable Long id, @PathVariable Long idUsuario) {
+        Optional<RegistroHorasEntity> registro = registroHorasServiceImpl.consultarEstadoUsuario(id, idUsuario);
         return registro.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    /**
+     * @ Body {Long, estado} metodo para eliminar registro por id "cambiar estado"
+     */
+    @PatchMapping("/registro/{id}")
+    public Boolean eliminarRegistroPorId(@PathVariable Long id, @RequestBody Boolean estado) {
+        log.info("Inicio metodo eliminarRegistroPorId en RegistroHorasController");
+        Boolean usuarioEliminado = registroHorasServiceImpl.eliminarRegistroPorId(id, estado);
+        log.info("Termina metodo eliminarRegistroPorId en RegistroHorasController");
+        return usuarioEliminado;
     }
 
 

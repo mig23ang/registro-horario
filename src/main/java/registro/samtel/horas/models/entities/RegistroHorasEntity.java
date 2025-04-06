@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class RegistroEntity {
+public class RegistroHorasEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +27,9 @@ public class RegistroEntity {
 
     @Column(nullable = true)
     private String horaSalida;
+
+    @Column(nullable = false)
+    private Boolean estadoRegistro;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)

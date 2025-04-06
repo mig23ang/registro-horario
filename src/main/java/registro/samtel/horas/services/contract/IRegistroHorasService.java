@@ -1,19 +1,21 @@
 package registro.samtel.horas.services.contract;
 
-import registro.samtel.horas.models.entities.RegistroEntity;
+import registro.samtel.horas.models.entities.RegistroHorasEntity;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IRegistroHorasService {
-    RegistroEntity crearRegistro(RegistroEntity registro);
+    RegistroHorasEntity crearRegistro(RegistroHorasEntity registro);
 
-    RegistroEntity consultarRegistroPorId(Long id);
+    RegistroHorasEntity consultarRegistroPorId(Long id);
 
-    List<RegistroEntity> consultarTodosRegistros();
+    List<RegistroHorasEntity> consultarTodosRegistros();
 
-    List<RegistroEntity> consultarTodosRegistrosUsuario(Long idUsuario);
+    List<RegistroHorasEntity> consultarTodosRegistrosUsuario(Long idUsuario);
 
-    Optional<RegistroEntity> consultarEstadoUsuario(Long id, Long idUsuario);
+    Optional<RegistroHorasEntity> consultarEstadoUsuario(Long id, Long idUsuario);
+
+    Boolean eliminarRegistroPorId(Long id, Boolean estado);
 
 }

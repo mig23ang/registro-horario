@@ -3,8 +3,7 @@ package registro.samtel.horas.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import registro.samtel.horas.models.contract.IRegistroHorasRepository;
-import registro.samtel.horas.models.entities.RegistroEntity;
-import registro.samtel.horas.models.entities.UsuarioEntity;
+import registro.samtel.horas.models.entities.RegistroHorasEntity;
 import registro.samtel.horas.services.contract.IRegistroHorasService;
 import registro.samtel.horas.utils.exceptions.UsuarioNoEncontradoException;
 
@@ -21,17 +20,17 @@ public class RegistroHorasServiceImpl implements IRegistroHorasService {
     private IRegistroHorasRepository registroHorasRepository;
 
     @Override
-    public RegistroEntity crearRegistro(RegistroEntity registro) {
+    public RegistroHorasEntity crearRegistro(RegistroHorasEntity registro) {
         log.info("Inicio metodo registroHoras en RegistroServiceImpl");
-        RegistroEntity registroHoras = registroHorasRepository.save(registro);
+        RegistroHorasEntity registroHoras = registroHorasRepository.save(registro);
         log.info("Termina metodo registroHoras en RegistroServiceImpl");
         return registroHoras;
     }
 
     @Override
-    public RegistroEntity consultarRegistroPorId(Long id) {
+    public RegistroHorasEntity consultarRegistroPorId(Long id) {
         log.info("Inicio metodo consultarRegistroPorId en UsuarioServiceImpl");
-        Optional<RegistroEntity> registroEntity = registroHorasRepository.findById(id);
+        Optional<RegistroHorasEntity> registroEntity = registroHorasRepository.findById(id);
         if (registroEntity.isEmpty()) {
             log.warning("No se encontro el registro con id: " + id);
 
@@ -42,9 +41,9 @@ public class RegistroHorasServiceImpl implements IRegistroHorasService {
     }
 
     @Override
-    public List<RegistroEntity> consultarTodosRegistros() {
+    public List<RegistroHorasEntity> consultarTodosRegistros() {
         log.info("Inicio metodo consultarTodosRegistros en RegistroServiceImpl");
-        List<RegistroEntity> registros = registroHorasRepository.findAll();
+        List<RegistroHorasEntity> registros = registroHorasRepository.findAll();
         if (registros.isEmpty()) {
             log.warning("No se encontraron registros en la base de datos");
             throw new UsuarioNoEncontradoException("No se encontraron registros en la base de datos");
@@ -54,9 +53,9 @@ public class RegistroHorasServiceImpl implements IRegistroHorasService {
     }
 
     @Override
-    public List<RegistroEntity> consultarTodosRegistrosUsuario(Long idUsuario) {
+    public List<RegistroHorasEntity> consultarTodosRegistrosUsuario(Long idUsuario) {
        log.info("Inicio metodo consultarTodosRegistrosUsuario en RegistroServiceImpl");
-       List<RegistroEntity> registrosUsuarios = registroHorasRepository.findByUsuarioId(idUsuario);
+       List<RegistroHorasEntity> registrosUsuarios = registroHorasRepository.findByUsuarioId(idUsuario);
         if (registrosUsuarios.isEmpty()) {
             log.warning("No se encontraron registros de usuarios en la base de datos");
             throw new UsuarioNoEncontradoException("No se encontraron registros de usuarios en la base de datos");
@@ -66,8 +65,24 @@ public class RegistroHorasServiceImpl implements IRegistroHorasService {
     }
 
     @Override
-    public Optional<RegistroEntity> consultarEstadoUsuario(Long id, Long idUsuario) {
+    public Optional<RegistroHorasEntity> consultarEstadoUsuario(Long id, Long idUsuario) {
         return registroHorasRepository.findByIdAndUsuarioId(id, idUsuario);
+    }
+
+    @Override
+    public Boolean eliminarRegistroPorId(Long id, Boolean estado) {
+        log.info("Inicio metodo eliminarRegistroPorId en RegistroServiceImpl");
+        Optional<RegistroHorasEntity> registroEntity = registroHorasRepository.findById(id);
+        if (registroEntity.isPresent()) {
+            // editar su estado a inactivo
+            RegistroHorasEntity registro = registroEntity.get();
+            registro.setEstadoRegistro(estado);
+            registroHorasRepository.save(registro); // 🔹 Guardar los cambios en la BD
+            log.info("Termina metodo eliminarRegistroPorId en RegistroServiceImpl");
+            return true;
+        }
+        log.warning("No se pudo cambiar el estado del registro " + id);
+        return false;
     }
 
 }
