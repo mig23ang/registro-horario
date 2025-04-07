@@ -34,3 +34,5 @@ git merge --reset  # abortar merge
 git reset --hard "Poner commit" # resetear cambios a un commit especifico
 
 ```
+
+tarea: nivelar las ramas de cada uno con la develop
