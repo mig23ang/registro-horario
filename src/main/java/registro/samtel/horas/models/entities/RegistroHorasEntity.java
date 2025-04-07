@@ -6,28 +6,30 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Table(name = "registro")
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class RegistroEntity {
+public class RegistroHorasEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private Date fecha;
+    private LocalDate fechaDeRegistro;
 
     @Column(nullable = false)
     private String horaEntrada;
 
-
     @Column(nullable = true)
     private String horaSalida;
+
+    @Column(nullable = false)
+    private Boolean estadoRegistro;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
