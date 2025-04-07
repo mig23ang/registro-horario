@@ -18,8 +18,10 @@ public class RegistroHorasController {
     @Autowired
     UsuarioServiceImpl usuarioService;
 
+
+
     /**
-     * @ Body {UsuarioEntity} metodo para crear usuario
+     * @ Body {UsuarioEntity} METODO PARA CREAR USUARIO
      */
     @PostMapping("/usuario")
     public UsuarioEntity crearUsuario(@RequestBody UsuarioEntity usuario) {
@@ -29,20 +31,11 @@ public class RegistroHorasController {
         return usuario;
     }
 
-    /**
-     * @ Body {Long} metodo para obtener usuario por id
-     */
-    @GetMapping("/usuario/{id}")
-    public UsuarioEntity consultarUsuarioPorId(@PathVariable Long id) {
-        log.info("Inicio metodo obtenerUsuarioPorId en RegistroHorasController");
 
-        UsuarioEntity usuario = usuarioService.consultarUsuarioPorId(id);
-        log.info("Termina metodo obtenerUsuarioPorId en RegistroHorasController");
-        return usuario;
-    }
+
 
     /**
-     * @ Body {Long id} metodo para editar usuario por id
+     * @ Body {Long id} METODO PARA EDITAR USUARIO POR ID
      */
     @PutMapping("/usuario/{id}")
     public UsuarioEntity editarUsuarioPorId(@PathVariable Long id, @RequestBody UsuarioEntity usuario) {
@@ -53,7 +46,7 @@ public class RegistroHorasController {
     }
 
     /**
-     * @ Body {Long, estado} metodo para eliminar usuario por id "cambiar estado"
+     * @ Body {Long, estado} METODO PARA ELIMINAR USUARIO POR ID "cambiar estado"
      */
     @PatchMapping("/usuario/{id}")
     public Boolean eliminarUsuarioPorId(@PathVariable Long id, @RequestBody Boolean estado) {
@@ -64,7 +57,7 @@ public class RegistroHorasController {
     }
 
     /**
-     * @ metodo para obtener todos los usuarios
+     * @ METODO PARA OBTENER TODOS LOS USUARIOS
      */
     @GetMapping("/usuarios/todos")
     public List<UsuarioEntity> consultarTodosUsuarios() {
@@ -73,4 +66,20 @@ public class RegistroHorasController {
         log.info("Termina metodo consultarTodosUsuarios en RegistroHorasController");
         return usuarios;
     }
+
+    /**
+     * @ Body {Long} METODO PARA OBTENER USUARIO POR ID
+     */
+    @GetMapping("/usuario/{id}")
+    public UsuarioEntity consultarUsuarioPorId(@PathVariable Long id) {
+        log.info("Inicio metodo obtenerUsuarioPorId en RegistroHorasController");
+
+        UsuarioEntity usuario = usuarioService.consultarUsuarioPorId(id);
+        log.info("Termina metodo obtenerUsuarioPorId en RegistroHorasController");
+        return usuario;
+    }
+
+
+
+
 }
