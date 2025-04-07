@@ -7,8 +7,8 @@ import registro.samtel.horas.models.entities.RegistroHorasEntity;
 import registro.samtel.horas.services.contract.IRegistroHorasService;
 import registro.samtel.horas.utils.exceptions.UsuarioNoEncontradoException;
 
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 import java.util.logging.Logger;
 
 @Service
@@ -64,9 +64,26 @@ public class RegistroHorasServiceImpl implements IRegistroHorasService {
        return registrosUsuarios;
     }
 
+//    @Override
+//    public Optional<RegistroHorasEntity> consultarEstadoUsuario(Long id, Long idUsuario) {
+//        return registroHorasRepository.findByIdAndUsuarioId(id, idUsuario);
+//    }
+
     @Override
-    public Optional<RegistroHorasEntity> consultarEstadoUsuario(Long id, Long idUsuario) {
-        return registroHorasRepository.findByIdAndUsuarioId(id, idUsuario);
+    public Optional<Map<String, Boolean>> consultarEstadoUsuario(Long id, Long idUsuario) {
+        log.info("Inicio metodo consultarEstadoUsuario en RegistroServiceImpl");
+        Optional<RegistroHorasEntity> registroOpt = registroHorasRepository.findByIdAndUsuarioId(id, idUsuario);
+        if (registroOpt.isPresent()) {
+            RegistroHorasEntity registro = registroOpt.get();
+            Map<String, Boolean> estado = new HashMap<>();
+            estado.put("estadoUsuario", registro.getUsuario().getEstado());
+            estado.put("estadoRegistro", registro.getEstadoRegistro());
+
+            log.info("Termina metodo consultarEstadoUsuario en RegistroServiceImpl");
+            return Optional.of(estado);
+        }
+        log.warning("No se encontro el registro con id: " + id + " y usuario id: " + idUsuario);
+        return Optional.empty();
     }
 
     @Override
@@ -84,5 +101,20 @@ public class RegistroHorasServiceImpl implements IRegistroHorasService {
         log.warning("No se pudo cambiar el estado del registro " + id);
         return false;
     }
+
+    @Override
+    public List<RegistroHorasEntity> consultarRegistrosPorFecha(LocalDate fechaInicio, LocalDate fechaFin) {
+        log.info("Inicio metodo consultarRegistrosPorFecha en RegistroServiceImpl");
+        List<RegistroHorasEntity> registros = registroHorasRepository.consultarRegistrosPorFecha(fechaInicio, fechaFin);
+        if (registros.isEmpty()) {
+            log.warning("No se encontraron registros entre " + fechaInicio + " y " + fechaFin);
+        } else {
+            log.info("Se encontraron " + registros.size() + " registros entre " + fechaInicio + " y " + fechaFin);
+        }
+        log.info("Termina metodo consultarRegistrosPorFecha en RegistroServiceImpl");
+        return registros;
+    }
+
+
 
 }
