@@ -1,19 +1,22 @@
 package registro.samtel.horas.services.contract;
 
 import registro.samtel.horas.models.entities.UsuarioEntity;
+
 import java.util.List;
-import java.util.Optional;
 
+<<<<<<<< HEAD:src/main/java/registro/samtel/horas/services/contract/UsuarioService.java
+public interface UsuarioService {
+
+========
 public interface IUsuarioService {
-    List<UsuarioEntity> listarUsuarios();
+>>>>>>>> 0e4d1e3144329c9f422ba96211a9a554e4df7d8e:src/main/java/registro/samtel/horas/services/contract/IUsuarioService.java
+    UsuarioEntity crearUsuario(UsuarioEntity usuario);
 
-    Optional<UsuarioEntity> obtenerUsuarioPorId(Long id);
+    UsuarioEntity consultarUsuarioPorId(Long id);
 
-    UsuarioEntity guardarUsuario(UsuarioEntity usuario);
+    UsuarioEntity editarUsuarioPorId(Long id, UsuarioEntity usuario);
 
-    Optional<UsuarioEntity> actualizarUsuario(Long id, UsuarioEntity usuarioActualizado);
+    Boolean eliminarUsuarioPorId(Long id, Boolean estado);
 
-    boolean eliminarUsuario(Long id);
-
+    List<UsuarioEntity> consultarTodosUsuarios();
 }
-
