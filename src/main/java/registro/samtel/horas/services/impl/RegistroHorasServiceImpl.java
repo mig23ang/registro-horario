@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import registro.samtel.horas.models.entities.RegistroHorasEntity;
 import registro.samtel.horas.repositories.RegistroHorasRepository;
 import registro.samtel.horas.services.contract.RegistroHorasService;
-import registro.samtel.horas.utils.exceptions.UsuarioNoEncontradoException;
+import registro.samtel.horas.utils.exceptions.RegistroNoEncontradoException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -34,7 +34,7 @@ public class RegistroHorasServiceImpl implements RegistroHorasService {
         List<RegistroHorasEntity> registros = registroHorasRepository.findAll();
         if (registros.isEmpty()) {
             log.warning("No se encontraron usuarios en la base de datos");
-            throw new UsuarioNoEncontradoException("No se encontraron registros en la base de datos");
+            throw new RegistroNoEncontradoException("No se encontraron registros en la base de datos");
         }
         log.info("Termina metodo consultarTodosRegistros en RegistroHorasServiceImpl");
         return registros;
@@ -47,7 +47,7 @@ public class RegistroHorasServiceImpl implements RegistroHorasService {
         if (RegistroHorasEntity.isEmpty()) {
             log.warning("No se encontro usuario con id: " + id);
 
-            throw new UsuarioNoEncontradoException("No se encontro registro con id: " + id + " en la base de datos");
+            throw new RegistroNoEncontradoException("No se encontro registro con id: " + id + " en la base de datos");
         }
         log.info("Termina metodo consultarRegistroPorId en RegistroHorasServiceImpl");
         return RegistroHorasEntity.get();
@@ -60,7 +60,7 @@ public class RegistroHorasServiceImpl implements RegistroHorasService {
         if (registroHoras.isEmpty()) {
             log.warning("No se encontro usuario con id: " + idUsuario);
 
-            throw new UsuarioNoEncontradoException("No se encontro registro con id: " + idUsuario + " en la base de datos");
+            throw new RegistroNoEncontradoException("No se encontro registro con id: " + idUsuario + " en la base de datos");
         }
         log.info("Termina metodo consultarTodosRegistrosUsuario en RegistroHorasServiceImpl");
         return registroHoras;
@@ -73,7 +73,7 @@ public class RegistroHorasServiceImpl implements RegistroHorasService {
         List<RegistroHorasEntity> registroHoras = registroHorasRepository.findByFecha(fecha);
         if (registroHoras.isEmpty()) {
             log.warning("No se encontraron registros con fecha: " + fechaStr);
-            throw new UsuarioNoEncontradoException("No se encontraron registros con fecha: " + fechaStr + " en la base de datos");
+            throw new RegistroNoEncontradoException("No se encontraron registros con fecha: " + fechaStr + " en la base de datos");
         }
         log.info("Termina metodo consultarRegistrosPorFecha en RegistroHorasServiceImpl");
         return registroHoras;
@@ -100,7 +100,6 @@ public class RegistroHorasServiceImpl implements RegistroHorasService {
 
         Optional<RegistroHorasEntity> RegistroHorasEntity = registroHorasRepository.findById(id);
         if (RegistroHorasEntity.isPresent()) {
-            // editar su estado a inactivo
             RegistroHorasEntity registro = RegistroHorasEntity.get();
             registro.setEstado(estado);
             registroHorasRepository.save(registro); // 🔹 Guardar los cambios en la BD
