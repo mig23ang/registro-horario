@@ -3,13 +3,14 @@
 # comnando de ejecucion
 
 ```sh
+mvn install
 
 mvn spring-boot:run 
 
-mvn install
+
 ```
 
- 
+
 
 
 
