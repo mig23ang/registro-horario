@@ -1,10 +1,11 @@
 package registro.samtel.horas.services.contract;
 
-import registro.samtel.horas.Models.entities.UsuarioEntity;
+import registro.samtel.horas.models.entities.UsuarioEntity;
 
 import java.util.List;
 
-public interface IUsuarioServiceImpl {
+public interface UsuarioService {
+
     UsuarioEntity crearUsuario(UsuarioEntity usuario);
 
     UsuarioEntity consultarUsuarioPorId(Long id);

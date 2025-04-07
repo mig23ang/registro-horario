@@ -1,11 +1,11 @@
-package registro.samtel.horas.Models.entities;
+package registro.samtel.horas.models.entities;
 
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import registro.samtel.horas.Models.enums.RolUsuario;
+import registro.samtel.horas.models.enums.RolUsuario;
 
 
 @Data

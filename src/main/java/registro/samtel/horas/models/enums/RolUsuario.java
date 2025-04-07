@@ -1,4 +1,4 @@
-package registro.samtel.horas.Models.enums;
+package registro.samtel.horas.models.enums;
 
 public enum RolUsuario {
     SUPER_ADMIN,

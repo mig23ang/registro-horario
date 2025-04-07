@@ -1,4 +1,4 @@
-package registro.samtel.horas.Models.entities;
+package registro.samtel.horas.models.entities;
 
 
 import jakarta.persistence.*;
@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class RegistroEntity {
+public class RegistroHorasEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,11 +26,14 @@ public class RegistroEntity {
     private String horaEntrada;
 
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String horaSalida;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private UsuarioEntity usuario;
+
+    @Column(nullable = false)
+    private Boolean estado;
 
 }
