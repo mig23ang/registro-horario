@@ -89,4 +89,8 @@ public class UsuarioServiceImpl implements IUsuarioServiceImpl {
         log.info("Termina metodo consultarTodosUsuarios en UsuarioServiceImpl");
         return usuarios;
     }
+
+    public UsuarioEntity buscarUsuarioPorIdentificacion(String idUsuario) {
+        return null;
+    }
 }
