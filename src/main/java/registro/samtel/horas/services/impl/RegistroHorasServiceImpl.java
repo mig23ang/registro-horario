@@ -5,11 +5,12 @@ import org.springframework.stereotype.Service;
 import registro.samtel.horas.models.contract.IRegistroHorasRepository;
 import registro.samtel.horas.models.entities.RegistroHorasEntity;
 import registro.samtel.horas.services.contract.IRegistroHorasService;
-import registro.samtel.horas.utils.exceptions.UsuarioNoEncontradoException;
+import registro.samtel.horas.utils.exceptions.RegistroNoEncontradoException;
 
 import java.time.LocalDate;
 import java.util.*;
 import java.util.logging.Logger;
+
 
 @Service
 public class RegistroHorasServiceImpl implements IRegistroHorasService {
@@ -29,12 +30,11 @@ public class RegistroHorasServiceImpl implements IRegistroHorasService {
 
     @Override
     public RegistroHorasEntity consultarRegistroPorId(Long id) {
-        log.info("Inicio metodo consultarRegistroPorId en UsuarioServiceImpl");
+        log.info("Inicio metodo consultarRegistroPorId en RegistroServiceImpl");
         Optional<RegistroHorasEntity> registroEntity = registroHorasRepository.findById(id);
         if (registroEntity.isEmpty()) {
-            log.warning("No se encontro el registro con id: " + id);
-
-            throw new UsuarioNoEncontradoException("No se encontro registro con id: " + id + " en la base de datos");
+            log.warning("No se encontró el registro con id: " + id);
+            throw new RegistroNoEncontradoException("No se encontró registro con id: " + id + " en la base de datos");
         }
         log.info("Termina metodo consultarRegistroPorId en RegistroServiceImpl");
         return registroEntity.get();
@@ -46,7 +46,7 @@ public class RegistroHorasServiceImpl implements IRegistroHorasService {
         List<RegistroHorasEntity> registros = registroHorasRepository.findAll();
         if (registros.isEmpty()) {
             log.warning("No se encontraron registros en la base de datos");
-            throw new UsuarioNoEncontradoException("No se encontraron registros en la base de datos");
+            throw new RegistroNoEncontradoException("No se encontraron registros en la base de datos");
         }
         log.info("Termina metodo consultarTodosregistros en RegistroServiceImpl");
         return registros;
@@ -54,21 +54,20 @@ public class RegistroHorasServiceImpl implements IRegistroHorasService {
 
     @Override
     public List<RegistroHorasEntity> consultarTodosRegistrosUsuario(Long idUsuario) {
-       log.info("Inicio metodo consultarTodosRegistrosUsuario en RegistroServiceImpl");
-       List<RegistroHorasEntity> registrosUsuarios = registroHorasRepository.findByUsuarioId(idUsuario);
+        log.info("Inicio metodo consultarTodosRegistrosUsuario en RegistroServiceImpl");
+        List<RegistroHorasEntity> registrosUsuarios = registroHorasRepository.findByUsuarioId(idUsuario);
         if (registrosUsuarios.isEmpty()) {
-            log.warning("No se encontraron registros de usuarios en la base de datos");
-            throw new UsuarioNoEncontradoException("No se encontraron registros de usuarios en la base de datos");
+            log.warning("No se encontraron registros del usuario con ID: " + idUsuario);
+            throw new RegistroNoEncontradoException("No se encontraron registros del usuario con ID: " + idUsuario);
         }
-        log.info("Termina metodo consultarTodosregistrosUsuario en RegistroServiceImpl");
-       return registrosUsuarios;
+        log.info("Termina metodo consultarTodosRegistrosUsuario en RegistroServiceImpl");
+        return registrosUsuarios;
     }
 
 //    @Override
 //    public Optional<RegistroHorasEntity> consultarEstadoUsuario(Long id, Long idUsuario) {
 //        return registroHorasRepository.findByIdAndUsuarioId(id, idUsuario);
 //    }
-
     @Override
     public Optional<Map<String, Boolean>> consultarEstadoUsuario(Long id, Long idUsuario) {
         log.info("Inicio metodo consultarEstadoUsuario en RegistroServiceImpl");
@@ -82,7 +81,7 @@ public class RegistroHorasServiceImpl implements IRegistroHorasService {
             log.info("Termina metodo consultarEstadoUsuario en RegistroServiceImpl");
             return Optional.of(estado);
         }
-        log.warning("No se encontro el registro con id: " + id + " y usuario id: " + idUsuario);
+        log.warning("No se encontró el registro con id: " + id + " y usuario id: " + idUsuario);
         return Optional.empty();
     }
 
@@ -91,15 +90,14 @@ public class RegistroHorasServiceImpl implements IRegistroHorasService {
         log.info("Inicio metodo eliminarRegistroPorId en RegistroServiceImpl");
         Optional<RegistroHorasEntity> registroEntity = registroHorasRepository.findById(id);
         if (registroEntity.isPresent()) {
-            // editar su estado a inactivo
             RegistroHorasEntity registro = registroEntity.get();
             registro.setEstadoRegistro(estado);
-            registroHorasRepository.save(registro); // 🔹 Guardar los cambios en la BD
+            registroHorasRepository.save(registro);
             log.info("Termina metodo eliminarRegistroPorId en RegistroServiceImpl");
             return true;
         }
-        log.warning("No se pudo cambiar el estado del registro " + id);
-        return false;
+        log.warning("No se pudo cambiar el estado del registro con ID: " + id);
+        throw new RegistroNoEncontradoException("No se pudo cambiar el estado porque el registro con ID: " + id + " no existe");
     }
 
     @Override
@@ -108,13 +106,11 @@ public class RegistroHorasServiceImpl implements IRegistroHorasService {
         List<RegistroHorasEntity> registros = registroHorasRepository.consultarRegistrosPorFecha(fechaInicio, fechaFin);
         if (registros.isEmpty()) {
             log.warning("No se encontraron registros entre " + fechaInicio + " y " + fechaFin);
-        } else {
-            log.info("Se encontraron " + registros.size() + " registros entre " + fechaInicio + " y " + fechaFin);
+            throw new RegistroNoEncontradoException("No se encontraron registros entre " + fechaInicio + " y " + fechaFin);
         }
+        log.info("Se encontraron " + registros.size() + " registros entre " + fechaInicio + " y " + fechaFin);
         log.info("Termina metodo consultarRegistrosPorFecha en RegistroServiceImpl");
         return registros;
     }
-
-
 
 }

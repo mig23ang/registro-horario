@@ -35,7 +35,6 @@ public class UsuarioController {
     @GetMapping("/usuario/{id}")
     public UsuarioEntity consultarUsuarioPorId(@PathVariable Long id) {
         log.info("Inicio metodo obtenerUsuarioPorId en RegistroHorasController");
-
         UsuarioEntity usuario = usuarioServiceImpl.consultarUsuarioPorId(id);
         log.info("Termina metodo obtenerUsuarioPorId en RegistroHorasController");
         return usuario;

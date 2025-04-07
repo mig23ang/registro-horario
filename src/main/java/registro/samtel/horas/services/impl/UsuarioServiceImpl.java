@@ -1,6 +1,5 @@
 package registro.samtel.horas.services.impl;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import registro.samtel.horas.models.contract.IUsuarioRepository;
@@ -17,6 +16,7 @@ import java.util.logging.Logger;
 public class UsuarioServiceImpl implements IUsuarioService {
 
     private static Logger log = Logger.getLogger(String.valueOf(UsuarioServiceImpl.class));
+
     @Autowired
     IUsuarioRepository usuarioRepository;
 
