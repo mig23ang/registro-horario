@@ -4,18 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import registro.samtel.horas.models.contract.IRegistroHorasRepository;
 import registro.samtel.horas.models.entities.RegistroHorasEntity;
-import registro.samtel.horas.services.contract.IRegistroHorasService;
+import registro.samtel.horas.services.contract.IRegistroHorasServiceImpl;
 import registro.samtel.horas.utils.exceptions.RegistroNoEncontradoException;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 
 @Service
-public class RegistroHorasServiceImpl implements IRegistroHorasService {
+public class RegistroHorasServiceImplImpl implements IRegistroHorasServiceImpl {
 
-    private static Logger log = Logger.getLogger(String.valueOf(RegistroHorasServiceImpl.class));
+    private static Logger log = Logger.getLogger(String.valueOf(RegistroHorasServiceImplImpl.class));
 
     @Autowired
     private IRegistroHorasRepository registroHorasRepository;
