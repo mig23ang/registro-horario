@@ -14,8 +14,8 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     // llamar variable de entorno
-    @Value("${MI_VARIABLE}")
-    String MI_VARIABLE;
+    // @Value("${MI_VARIABLE}")
+    // String MI_VARIABLE;
     // Manejar cualquier excepción general
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGeneralException(Exception ex) {
