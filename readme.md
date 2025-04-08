@@ -1,8 +1,9 @@
-## software para el registro de horas de entrada y salida de trabajadores
+# Software para el registro de horas de entrada y salida de trabajadores
 
-# comnando de ejecucion
+## comando de ejecucion
 
 ```sh
+
 mvn install
 
 mvn spring-boot:run 
@@ -10,21 +11,17 @@ mvn spring-boot:run
 
 ```
 
-
-
-
-
 mvn clean install generate-sources
 
-## COMANDO PARA GENERAR LA BASE DE DATOS POSTGREES CONDOCKER
+## COMANDO PARA GENERAR LA BASE DE DATOS POSTGRES CON DOCKER
 ```sh
 docker run --name postgres-horas -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin123 -e POSTGRES_DB=empresa -p 5432:5432 postgres
 ```
+
 ## comando para resetar cambios con conflictos
 
 
-
-## script para crear ramas y subor al remoto
+## script para crear ramas y subir al remoto
 ```sh
 git checkout -b nombre-rama # crear rama
 git checkout nombre-rama # cambiar a la rama
@@ -36,4 +33,33 @@ git reset --hard "Poner commit" # resetear cambios a un commit especifico
 
 ```
 
-tarea: nivelar las ramas de cada uno con la develop
+## Agregar Variables de entorno: 
+### Crear archivo .env y pegar:
+### (Comentar o descomentar segun la base de datos que se vaya a utilizar)
+```
+# Base de datos PostgreSQL
+DATASOURCE_URL=jdbc:postgresql://localhost:5432/empresa
+DATASOURCE_USERNAME=admin
+DATASOURCE_PASSWORD=admin123
+
+# Base de datos MySQL
+# DATASOURCE_URL=jdbc:mysql://localhost:3306/empresa
+# DATASOURCE_USERNAME=root
+# DATASOURCE_PASSWORD=admin
+
+```
+### En application.properties agregar:
+```
+spring.application.name=horas
+
+spring.jpa.hibernate.ddl-auto=update
+
+# Importa el archivo .env
+spring.config.import=optional:file:.env[.properties]
+
+# Propiedades de conexion usando variables de entorno
+spring.datasource.url=${DATASOURCE_URL}
+spring.datasource.username=${DATASOURCE_USERNAME}
+spring.datasource.password=${DATASOURCE_PASSWORD}
+
+```

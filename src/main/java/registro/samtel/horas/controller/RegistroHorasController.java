@@ -5,7 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import registro.samtel.horas.models.entities.RegistroHorasEntity;
-import registro.samtel.horas.services.impl.RegistroHorasServiceImplImpl;
+import registro.samtel.horas.services.impl.RegistroHorasServiceImpl;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,7 +20,7 @@ public class RegistroHorasController {
     private static Logger log = Logger.getLogger(String.valueOf(RegistroHorasController.class));
 
     @Autowired
-    RegistroHorasServiceImplImpl registroHorasServiceImpl;
+    RegistroHorasServiceImpl registroHorasServiceImpl;
 
     /**
      * @ Body {RegistroEntity} metodo para crear registrar Horas

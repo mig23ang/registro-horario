@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public interface IRegistroHorasServiceImpl {
+public interface IRegistroHorasService {
     RegistroHorasEntity crearRegistro(RegistroHorasEntity registro);
 
     RegistroHorasEntity consultarRegistroPorId(Long id);
