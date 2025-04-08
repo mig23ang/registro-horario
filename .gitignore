@@ -1,10 +1,14 @@
 HELP.md
+
+**/src/main/**/application.properties
+
+
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/main/**/resources/
 !**/src/test/**/target/
-
 ### STS ###
 .apt_generated
 .classpath

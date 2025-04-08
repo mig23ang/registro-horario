@@ -4,7 +4,8 @@ import registro.samtel.horas.models.entities.UsuarioEntity;
 
 import java.util.List;
 
-public interface IUsuarioService {
+public interface IUsuarioServiceImpl {
+
     UsuarioEntity crearUsuario(UsuarioEntity usuario);
 
     UsuarioEntity consultarUsuarioPorId(Long id);

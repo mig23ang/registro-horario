@@ -1,5 +1,6 @@
 package registro.samtel.horas.utils.exceptions;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,6 +13,9 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    // llamar variable de entorno
+    @Value("${MI_VARIABLE}")
+    String MI_VARIABLE;
     // Manejar cualquier excepción general
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGeneralException(Exception ex) {
