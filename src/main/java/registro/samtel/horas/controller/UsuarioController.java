@@ -54,7 +54,7 @@ public class UsuarioController {
     /**
      * @ Body {Long, estado} metodo para eliminar usuario por id "cambiar estado"
      */
-    @PatchMapping("/usuario/{id}")
+    @DeleteMapping("/usuario/{id}")
     public Boolean eliminarUsuarioPorId(@PathVariable Long id, @RequestBody Boolean estado) {
         log.info("Inicio metodo eliminarUsuarioPorId en RegistroHorasController");
         Boolean usuarioEliminado = usuarioServiceImpl.eliminarUsuarioPorId(id, estado);
