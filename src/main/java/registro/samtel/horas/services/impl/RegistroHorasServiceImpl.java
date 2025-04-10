@@ -16,9 +16,9 @@ import java.util.logging.Logger;
 
 
 @Service
-public class RegistroHorasServiceImplImpl implements IRegistroHorasServiceImpl {
+public class RegistroHorasServiceImpl implements IRegistroHorasServiceImpl {
 
-    private static Logger log = Logger.getLogger(String.valueOf(RegistroHorasServiceImplImpl.class));
+    private static Logger log = Logger.getLogger(String.valueOf(RegistroHorasServiceImpl.class));
 
     @Autowired
     private IRegistroHorasRepository registroHorasRepository;
