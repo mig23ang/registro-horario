@@ -39,7 +39,7 @@ public class RegistroHorasServiceImplImpl implements IRegistroHorasServiceImpl {
             log.warning("No se encontró el registro con id: " + id);
             throw new RegistroNoEncontradoException("No se encontró registro con id: " + id + " en la base de datos");
         }
-        log.info("Termina metodo consultarRegistroPorId en RegistroServiceImpl");
+        log.info("Termina metodo consultarRegistroPorId en RegistroServiceImpl cambio");
         return registroEntity.get();
     }
 
