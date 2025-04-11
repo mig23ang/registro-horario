@@ -1,13 +1,11 @@
 package registro.samtel.horas.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import registro.samtel.horas.models.entities.RegistroHorasEntity;
 import registro.samtel.horas.services.impl.RegistroHorasServiceImpl;
-
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,8 +22,6 @@ public class RegistroHorasController {
     @Autowired
     RegistroHorasServiceImpl registroHorasServiceImpl;
 
-
-
     /**
      * @ Body {RegistroEntity} metodo para crear registrar Horas
      */
@@ -36,8 +32,6 @@ public class RegistroHorasController {
         log.info("Termina metodo crearRegistro en RegistroHorasController");
         return creado;
     }
-
-
 
     /**
      * @ Body {Long} metodo para consultar registro por id
@@ -50,8 +44,6 @@ public class RegistroHorasController {
         return registro;
     }
 
-
-
     /**
      * @ metodo para obtener todos los registros
      */
@@ -63,8 +55,6 @@ public class RegistroHorasController {
         return registros;
     }
 
-
-
     /**
      * @ metodo para obtener todos los registros horas de un usuario
      */
@@ -75,8 +65,6 @@ public class RegistroHorasController {
         log.info("Termina metodo consultarTodosRegistrosUsuario en RegistroHorasController");
         return registrosUsuario;
     }
-
-
 
     /**
      * @ metodo para consultar estado del usuario y del registro
@@ -95,8 +83,6 @@ public class RegistroHorasController {
         }
     }
 
-
-
     /**
      * @ Body {Long, estado} metodo para eliminar registro por id "cambiar estado"
      */
@@ -113,8 +99,6 @@ public class RegistroHorasController {
         return eliminado;
     }
 
-
-
     /**
      * @ metodo para consultar registros por rango de fechas
      */
@@ -128,27 +112,6 @@ public class RegistroHorasController {
         log.info("Termina metodo consultarRegistrosPorFecha en RegistroHorasController con " + registros.size() + " registros encontrados");
         return ResponseEntity.ok(registros);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+

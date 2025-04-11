@@ -25,7 +25,7 @@ public class RegistroHorasServiceImpl implements IRegistroHorasService {
 
     @Override
     public RegistroHorasEntity crearRegistro(RegistroHorasEntity registro) {
-        log.info("Inicio metodo registroHoras en RegistroServiceImpl");
+        log.info("Inicio metodo registroHoras en RegistroHorasServiceImpl");
         RegistroHorasEntity registroHoras = registroHorasRepository.save(registro);
         log.info("Termina metodo registroHoras en RegistroServiceImpl");
         return registroHoras;
@@ -33,13 +33,13 @@ public class RegistroHorasServiceImpl implements IRegistroHorasService {
 
     @Override
     public RegistroHorasEntity consultarRegistroPorId(Long id) {
-        log.info("Inicio metodo consultarRegistroPorId en RegistroServiceImpl");
+        log.info("Inicio metodo consultarRegistroPorId en RegistroHorasServiceImpl");
         Optional<RegistroHorasEntity> registroEntity = registroHorasRepository.findById(id);
         if (registroEntity.isEmpty()) {
             log.warning("No se encontró el registro con id: " + id);
             throw new RegistroNoEncontradoException("No se encontró registro con id: " + id + " en la base de datos");
         }
-        log.info("Termina metodo consultarRegistroPorId en RegistroServiceImpl");
+        log.info("Termina metodo consultarRegistroPorId en RegistroServiceImpl cambio");
         return registroEntity.get();
     }
 

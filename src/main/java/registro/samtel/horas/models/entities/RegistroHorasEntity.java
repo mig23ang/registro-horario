@@ -19,20 +19,20 @@ public class RegistroHorasEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private LocalDate fechaDeRegistro;
 
-    @Column(nullable = false)
+    private String fechaDeRegistro;
+
+
     private String horaEntrada;
 
-    @Column(nullable = true)
+
     private String horaSalida;
 
-    @Column(nullable = false)
+
     private Boolean estadoRegistro;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(name = "usuario_id")
     private UsuarioEntity usuario;
 
 }
