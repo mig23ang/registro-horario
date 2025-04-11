@@ -1,5 +1,6 @@
 package registro.samtel.horas.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class RegistroHorasController {
      * @ Body {RegistroEntity} metodo para crear registrar Horas
      */
     @PostMapping("/registro")
-    public RegistroHorasEntity crearRegistro(@RequestBody RegistroHorasEntity registro) {
+    public RegistroHorasEntity crearRegistro(@RequestBody @Valid RegistroHorasEntity registro) {
         log.info("Inicio metodo crearRegistro en RegistroHorasController");
         RegistroHorasEntity creado = registroHorasServiceImpl.crearRegistro(registro);
         log.info("Termina metodo crearRegistro en RegistroHorasController");

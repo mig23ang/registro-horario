@@ -56,7 +56,7 @@ public class GlobalExceptionHandler {
         Map<String, String> errores = new HashMap<>();
 
         // Recorre los errores de validación y agregarlos al mapa
-//devuelve objeto con la info de la validación-lista de errores-recorre cada error
+        //devuelve objeto con la info de la validación-lista de errores-recorre cada error
         ex.getBindingResult().getFieldErrors().forEach(error ->
                 //error.getField() obtiene el campo que falló la validación
                 //error.getDefaultMessage() obtiene el mensaje de error
