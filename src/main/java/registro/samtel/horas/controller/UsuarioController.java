@@ -45,7 +45,7 @@ public class UsuarioController {
      * @ Body {Long id} metodo para editar usuario por id
      */
     @PutMapping("/editarUsuario/{id}")
-    public UsuarioEntity editarUsuarioPorId(@PathVariable Long id, @Valid @RequestBody UsuarioEntity usuario) {
+    public UsuarioEntity editarUsuarioPorId(@PathVariable Long id, @RequestBody UsuarioEntity usuario) {
         log.info("Inicio metodo editarUsuarioPorId en RegistroHorasController");
         UsuarioEntity usuarioEditado = usuarioServiceImpl.editarUsuarioPorId(id, usuario);
         log.info("Termina metodo editarUsuarioPorId en RegistroHorasController");
