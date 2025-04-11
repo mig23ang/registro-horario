@@ -1,5 +1,6 @@
 package registro.samtel.horas.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -17,100 +18,67 @@ import java.util.logging.Logger;
 @RequestMapping("/api/v1")
 public class RegistroHorasController {
 
-    private static Logger log = Logger.getLogger(String.valueOf(RegistroHorasController.class));
+    private static final Logger log = Logger.getLogger(RegistroHorasController.class.getName());
 
     @Autowired
-    RegistroHorasServiceImpl registroHorasServiceImpl;
+    private RegistroHorasServiceImpl registroHorasServiceImpl;
 
-    /**
-     * @ Body {RegistroEntity} metodo para crear registrar Horas
-     */
     @PostMapping("/registro")
-    public RegistroHorasEntity crearRegistro(@RequestBody RegistroHorasEntity registro) {
-        log.info("Inicio metodo crearRegistro en RegistroHorasController");
+    public ResponseEntity<RegistroHorasEntity> crearRegistro(@Valid @RequestBody RegistroHorasEntity registro) {
+        log.info("Inicio método crearRegistro");
         RegistroHorasEntity creado = registroHorasServiceImpl.crearRegistro(registro);
-        log.info("Termina metodo crearRegistro en RegistroHorasController");
-        return creado;
+        log.info("Registro creado exitosamente");
+        return ResponseEntity.ok(creado);
     }
 
-    /**
-     * @ Body {Long} metodo para consultar registro por id
-     */
     @GetMapping("/registro/{id}")
-    public RegistroHorasEntity consultarRegistroPorId(@PathVariable Long id) {
-        log.info("Inicio metodo consultarRegistroPorId en RegistroHorasController");
+    public ResponseEntity<RegistroHorasEntity> consultarRegistroPorId(@PathVariable Long id) {
+        log.info("Consultando registro por ID: " + id);
         RegistroHorasEntity registro = registroHorasServiceImpl.consultarRegistroPorId(id);
-        log.info("Termina metodo consultarRegistroPorId en RegistroHorasController");
-        return registro;
+        return ResponseEntity.ok(registro);
     }
 
-    /**
-     * @ metodo para obtener todos los registros
-     */
     @GetMapping("/registros/todos")
-    public List<RegistroHorasEntity> consultarTodosRegistros() {
-        log.info("Inicio metodo consultarTodosRegistros en RegistroHorasController");
+    public ResponseEntity<List<RegistroHorasEntity>> consultarTodosRegistros() {
+        log.info("Consultando todos los registros");
         List<RegistroHorasEntity> registros = registroHorasServiceImpl.consultarTodosRegistros();
-        log.info("Termina metodo consultarTodosRegistros en RegistroHorasController");
-        return registros;
+        return ResponseEntity.ok(registros);
     }
 
-    /**
-     * @ metodo para obtener todos los registros horas de un usuario
-     */
     @GetMapping("/registros/usuario/{idUsuario}")
-    public List<RegistroHorasEntity> consultarTodosRegistrosUsuario(@PathVariable Long idUsuario) {
-        log.info("Inicio metodo consultarTodosRegistrosUsuario en RegistroHorasController");
+    public ResponseEntity<List<RegistroHorasEntity>> consultarTodosRegistrosUsuario(@PathVariable Long idUsuario) {
+        log.info("Consultando registros del usuario ID: " + idUsuario);
         List<RegistroHorasEntity> registrosUsuario = registroHorasServiceImpl.consultarTodosRegistrosUsuario(idUsuario);
-        log.info("Termina metodo consultarTodosRegistrosUsuario en RegistroHorasController");
-        return registrosUsuario;
+        return ResponseEntity.ok(registrosUsuario);
     }
 
-    /**
-     * @ metodo para consultar estado del usuario y del registro
-     */
-    @GetMapping("registro/{id}/usuario/{idUsuario}")
-    public ResponseEntity<Map<String, Boolean>> consultarEstadoUsuario(@PathVariable Long id, @PathVariable Long idUsuario) {
-        log.info("Inicio metodo consultarEstadoUsuario en RegistroHorasController");
+    @GetMapping("/registro/{id}/usuario/{idUsuario}")
+    public ResponseEntity<Map<String, Boolean>> consultarEstadoUsuario(
+            @PathVariable Long id,
+            @PathVariable Long idUsuario
+    ) {
+        log.info("Consultando estado de usuario en registro ID: " + id + " y usuario ID: " + idUsuario);
         Optional<Map<String, Boolean>> estado = registroHorasServiceImpl.consultarEstadoUsuario(id, idUsuario);
-
-        if (estado.isPresent()) {
-            log.info("Termina metodo consultarEstadoUsuario en RegistroHorasController con éxito");
-            return ResponseEntity.ok(estado.get());
-        } else {
-            log.warning("No se encontró estado para registro con id: " + id + " y usuario id: " + idUsuario);
-            return ResponseEntity.notFound().build();
-        }
+        return estado.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    /**
-     * @ Body {Long, estado} metodo para eliminar registro por id "cambiar estado"
-     */
     @PatchMapping("/registro/{id}")
-    public Boolean eliminarRegistroPorId(@PathVariable Long id, @RequestBody Boolean estado) {
-        log.info("Inicio metodo eliminarRegistroPorId en RegistroHorasController");
-        Boolean eliminado = registroHorasServiceImpl.eliminarRegistroPorId(id, estado);
-        if (eliminado) {
-            log.info("Registro con id " + id + " actualizado correctamente");
-        } else {
-            log.warning("No se pudo actualizar el registro con id " + id);
-        }
-        log.info("Termina metodo eliminarRegistroPorId en RegistroHorasController");
-        return eliminado;
+    public ResponseEntity<Boolean> eliminarRegistroPorId(
+            @PathVariable Long id,
+            @RequestBody Boolean estado
+    ) {
+        log.info("Actualizando estado del registro ID: " + id);
+        boolean actualizado = registroHorasServiceImpl.eliminarRegistroPorId(id, estado);
+        return ResponseEntity.ok(actualizado);
     }
 
-    /**
-     * @ metodo para consultar registros por rango de fechas
-     */
     @GetMapping("/registro/fecha")
     public ResponseEntity<List<RegistroHorasEntity>> consultarRegistrosPorFecha(
             @RequestParam("inicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaInicio,
-            @RequestParam("fin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaFin) {
-
-        log.info("Inicio metodo consultarRegistrosPorFecha en RegistroHorasController. Rango: " + fechaInicio + " a " + fechaFin);
+            @RequestParam("fin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaFin
+    ) {
+        log.info("Consultando registros entre " + fechaInicio + " y " + fechaFin);
         List<RegistroHorasEntity> registros = registroHorasServiceImpl.consultarRegistrosPorFecha(fechaInicio, fechaFin);
-        log.info("Termina metodo consultarRegistrosPorFecha en RegistroHorasController con " + registros.size() + " registros encontrados");
         return ResponseEntity.ok(registros);
     }
 }
-

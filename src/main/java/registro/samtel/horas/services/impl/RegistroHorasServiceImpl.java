@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-
 @Service
 public class RegistroHorasServiceImpl implements IRegistroHorasServiceImpl {
 
@@ -39,7 +38,7 @@ public class RegistroHorasServiceImpl implements IRegistroHorasServiceImpl {
             log.warning("No se encontró el registro con id: " + id);
             throw new RegistroNoEncontradoException("No se encontró registro con id: " + id + " en la base de datos");
         }
-        log.info("Termina metodo consultarRegistroPorId en RegistroServiceImpl cambio");
+        log.info("Termina metodo consultarRegistroPorId en RegistroServiceImpl");
         return registroEntity.get();
     }
 
@@ -51,7 +50,7 @@ public class RegistroHorasServiceImpl implements IRegistroHorasServiceImpl {
             log.warning("No se encontraron registros en la base de datos");
             throw new RegistroNoEncontradoException("No se encontraron registros en la base de datos");
         }
-        log.info("Termina metodo consultarTodosregistros en RegistroServiceImpl");
+        log.info("Termina metodo consultarTodosRegistros en RegistroServiceImpl");
         return registros;
     }
 
@@ -67,10 +66,6 @@ public class RegistroHorasServiceImpl implements IRegistroHorasServiceImpl {
         return registrosUsuarios;
     }
 
-//    @Override
-//    public Optional<RegistroHorasEntity> consultarEstadoUsuario(Long id, Long idUsuario) {
-//        return registroHorasRepository.findByIdAndUsuarioId(id, idUsuario);
-//    }
     @Override
     public Optional<Map<String, Boolean>> consultarEstadoUsuario(Long id, Long idUsuario) {
         log.info("Inicio metodo consultarEstadoUsuario en RegistroServiceImpl");
@@ -115,5 +110,4 @@ public class RegistroHorasServiceImpl implements IRegistroHorasServiceImpl {
         log.info("Termina metodo consultarRegistrosPorFecha en RegistroServiceImpl");
         return registros;
     }
-
 }
