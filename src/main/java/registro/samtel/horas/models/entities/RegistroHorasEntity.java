@@ -19,6 +19,7 @@ public class RegistroHorasEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @Column(nullable = false)
     private LocalDate fechaDeRegistro;
 

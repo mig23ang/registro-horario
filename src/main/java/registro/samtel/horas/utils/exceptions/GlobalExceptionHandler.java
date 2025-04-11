@@ -3,6 +3,7 @@ package registro.samtel.horas.utils.exceptions;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -49,4 +50,6 @@ public class GlobalExceptionHandler {
         response.put("status", status.value());
         return new ResponseEntity<>(response, status);
     }
+
+
 }

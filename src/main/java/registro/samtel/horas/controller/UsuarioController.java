@@ -1,6 +1,7 @@
 package registro.samtel.horas.controller;
 
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import registro.samtel.horas.models.entities.UsuarioEntity;
@@ -22,7 +23,7 @@ public class UsuarioController {
      * @ Body {UsuarioEntity} metodo para crear usuario
      */
     @PostMapping("/registro")
-    public UsuarioEntity crearUsuario(@RequestBody UsuarioEntity usuario) {
+    public UsuarioEntity crearUsuario(@Valid @RequestBody UsuarioEntity usuario) {
         log.info("Inicio metodo crearUsuario en RegistroHorasController");
         usuarioServiceImpl.crearUsuario(usuario);
         log.info("Termina metodo crearUsuario en RegistroHorasController");
@@ -44,7 +45,7 @@ public class UsuarioController {
      * @ Body {Long id} metodo para editar usuario por id
      */
     @PutMapping("/editarUsuario/{id}")
-    public UsuarioEntity editarUsuarioPorId(@PathVariable Long id, @RequestBody UsuarioEntity usuario) {
+    public UsuarioEntity editarUsuarioPorId(@PathVariable Long id, @Valid @RequestBody UsuarioEntity usuario) {
         log.info("Inicio metodo editarUsuarioPorId en RegistroHorasController");
         UsuarioEntity usuarioEditado = usuarioServiceImpl.editarUsuarioPorId(id, usuario);
         log.info("Termina metodo editarUsuarioPorId en RegistroHorasController");
