@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/usuario")
 public class UsuarioController {
 
     private static Logger log = Logger.getLogger(String.valueOf(UsuarioController.class));
@@ -21,7 +21,7 @@ public class UsuarioController {
     /**
      * @ Body {UsuarioEntity} metodo para crear usuario
      */
-    @PostMapping("/usuario")
+    @PostMapping("/registro")
     public UsuarioEntity crearUsuario(@RequestBody UsuarioEntity usuario) {
         log.info("Inicio metodo crearUsuario en RegistroHorasController");
         usuarioServiceImpl.crearUsuario(usuario);
@@ -32,8 +32,8 @@ public class UsuarioController {
     /**
      * @ Body {Long} metodo para obtener usuario por id
      */
-    @GetMapping("/usuario/{id}")
-    public UsuarioEntity consultarUsuarioPorId(@PathVariable Long id) {
+    @GetMapping("/consultarUsuario/{id}")
+    public UsuarioEntity consultarUsuario(@PathVariable Long id) {
         log.info("Inicio metodo obtenerUsuarioPorId en RegistroHorasController");
         UsuarioEntity usuario = usuarioServiceImpl.consultarUsuarioPorId(id);
         log.info("Termina metodo obtenerUsuarioPorId en RegistroHorasController");
@@ -43,7 +43,7 @@ public class UsuarioController {
     /**
      * @ Body {Long id} metodo para editar usuario por id
      */
-    @PutMapping("/usuario/{id}")
+    @PutMapping("/editarUsuario/{id}")
     public UsuarioEntity editarUsuarioPorId(@PathVariable Long id, @RequestBody UsuarioEntity usuario) {
         log.info("Inicio metodo editarUsuarioPorId en RegistroHorasController");
         UsuarioEntity usuarioEditado = usuarioServiceImpl.editarUsuarioPorId(id, usuario);
@@ -54,7 +54,7 @@ public class UsuarioController {
     /**
      * @ Body {Long, estado} metodo para eliminar usuario por id "cambiar estado"
      */
-    @DeleteMapping("/usuario/{id}")
+    @DeleteMapping("/eliminarUsuario/{id}")
     public Boolean eliminarUsuarioPorId(@PathVariable Long id, @RequestBody Boolean estado) {
         log.info("Inicio metodo eliminarUsuarioPorId en RegistroHorasController");
         Boolean usuarioEliminado = usuarioServiceImpl.eliminarUsuarioPorId(id, estado);
@@ -65,7 +65,7 @@ public class UsuarioController {
     /**
      * @ metodo para obtener todos los usuarios
      */
-    @GetMapping("/usuarios/todos")
+    @GetMapping("/consultarTodos")
     public List<UsuarioEntity> consultarTodosUsuarios() {
         log.info("Inicio metodo consultarTodosUsuarios en RegistroHorasController");
         List<UsuarioEntity> usuarios = usuarioServiceImpl.consultarTodosUsuarios();
