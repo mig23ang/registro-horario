@@ -99,8 +99,6 @@ Sube tu código a tu rama personal.
 
 Sube un video corto (puede ser grabación de pantalla) mostrando:
 
-El proceso de merge desde develop
-
 Ejecución de la API con datos inválidos (para que se vean los mensajes de validación)
 
 Una prueba de una excepción personalizada
