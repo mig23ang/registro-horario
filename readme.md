@@ -34,6 +34,8 @@ git merge --reset  # abortar merge
 
 git reset --hard "Poner commit" # resetear cambios a un commit especifico
 
+#importante eliminar por cache el properties sin la carpeta resources
+git rm --cached src/main/resources/application.properties
 ```
 
 tarea: nivelar las ramas de cada uno con la develop
