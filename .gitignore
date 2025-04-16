@@ -1,10 +1,5 @@
 HELP.md
 
-# Excluir SOLO el application.properties en cualquier subdirectorio
-**/application.properties
-
-
-
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
