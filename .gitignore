@@ -3,9 +3,7 @@ HELP.md
 # Excluir SOLO el application.properties en cualquier subdirectorio
 **/application.properties
 
-# Pero permitir que otros archivos en resources/ se suban
-!src/main/resources/**
-!src/main/resources/*.*
+
 
 
 target/
