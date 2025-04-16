@@ -4,16 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import registro.samtel.horas.models.contract.IRegistroHorasRepository;
 import registro.samtel.horas.models.entities.RegistroHorasEntity;
-import registro.samtel.horas.services.contract.IRegistroHorasService;
+import registro.samtel.horas.services.contract.IRegistroHorasServiceImpl;
 import registro.samtel.horas.utils.exceptions.RegistroNoEncontradoException;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 
 @Service
-public class RegistroHorasServiceImpl implements IRegistroHorasService {
+public class RegistroHorasServiceImpl implements IRegistroHorasServiceImpl {
 
     private static Logger log = Logger.getLogger(String.valueOf(RegistroHorasServiceImpl.class));
 
@@ -36,7 +39,7 @@ public class RegistroHorasServiceImpl implements IRegistroHorasService {
             log.warning("No se encontró el registro con id: " + id);
             throw new RegistroNoEncontradoException("No se encontró registro con id: " + id + " en la base de datos");
         }
-        log.info("Termina metodo consultarRegistroPorId en RegistroServiceImpl");
+        log.info("Termina metodo consultarRegistroPorId en RegistroServiceImpl cambio");
         return registroEntity.get();
     }
 
